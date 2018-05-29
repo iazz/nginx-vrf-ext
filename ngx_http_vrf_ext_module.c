@@ -47,7 +47,8 @@ ngx_http_vrf_get_variable(ngx_http_request_t		*r,
   }
 
   v->data         = name;
-  v->len          = name_len;
+  v->len          = name_len > 0 && name[name_len - 1] == 0?
+    name_len - 1: name_len;
   v->valid        = 1;
   v->no_cacheable = 0;
   v->not_found    = 0;
